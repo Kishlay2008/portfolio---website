@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kishlay Raj | Portfolio</title>
+  <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet"/>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+    :root{
+      --primary:#5b7cfa;
+      --accent:#34a853;
+      --bg:#f7f8fc;
+      --text:#1b1e23;
+      --muted:#7a7f8a;
+      --card:#ffffff;
+
+      --dark-bg:#0f1216;
+      --dark-card:#151a21;
+      --dark-text:#e9eef7;
+      --dark-muted:#8f9aa8;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:'Poppins',sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      transition:background .3s,color .3s;
+    }
+
+    /* Header */
+    header{
+      position:fixed;top:0;left:0;width:100%;
+      backdrop-filter:saturate(180%) blur(8px);
+      background:rgba(255,255,255,.7);
+      border-bottom:1px solid rgba(0,0,0,.06);
+      z-index:1000;
+    }
+    .nav{
+      max-width:1100px;margin:0 auto;padding:.8rem 1rem;
+      display:flex;align-items:center;justify-content:space-between;
+    }
+    .logo{
+      font-weight:700;font-size:1.25rem;color:var(--primary);
+      letter-spacing:.5px;
+    }
+    .nav__links{display:flex;gap:1.25rem;list-style:none}
+    .nav__links a{
+      color:var(--text); text-decoration:none; font-weight:500;
+      padding:.4rem .6rem; border-radius:.4rem; transition:.2s;
+    }
+    .nav__links a:hover,.nav__links a.active{color:#fff;background:var(--primary)}
+    .nav__right{display:flex;align-items:center;gap:.6rem}
+    .nav__toggle{display:none;font-size:1.8rem;cursor:pointer}
+    .mode-btn{
+      border:none;background:var(--primary);color:#fff;cursor:pointer;
+      padding:.45rem .7rem;border-radius:.4rem;font-weight:600;
+    }
+
+    /* Hero */
+    .hero{
+      min-height:100vh;
+      display:grid;place-items:center;
+      background:linear-gradient(135deg,#5b7cfa 0%,#34a853 100%);
+      color:#fff;text-align:center;padding-top:4.5rem;
+    }
+    .hero__card{
+      width:min(950px,92%);margin:auto;padding:2rem 1.5rem;
+      background:rgba(255,255,255,.12);
+      backdrop-filter:blur(12px);
+      border:1px solid rgba(255,255,255,.25);
+      border-radius:1rem;
+      box-shadow:0 20px 50px rgba(0,0,0,.15);
+    }
+    .hero__title{font-size:2.4rem;line-height:1.25;font-weight:700}
+    .hero__title span{
+      background:linear-gradient(90deg,#ffd36f,#ff6a88,#8e54e9);
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+      display:inline-block;background-size:200%;animation:shine 6s linear infinite;
+    }
+    @keyframes shine{0%{background-position:0%}100%{background-position:200%}}
+    .hero__typing{margin:.6rem 0 1rem;font-weight:600;opacity:.95}
+    .hero__cta{display:flex;justify-content:center;gap:.8rem;flex-wrap:wrap}
+    .btn{
+      display:inline-flex;align-items:center;gap:.4rem;
+      padding:.7rem 1rem;border-radius:.55rem;font-weight:600;
+      border:1px solid rgba(255,255,255,.6); color:#fff;
+      transition:.25s; text-decoration:none;
+    }
+    .btn.primary{background:#fff;color:#1c2a4a;border-color:#fff}
+    .btn:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(0,0,0,.25)}
+
+    /* Sections */
+    .section{padding:4rem 1rem}
+    .container{max-width:1100px;margin:0 auto}
+    .section__title{
+      font-size:2rem;font-weight:700;color:var(--primary);
+      text-align:center;margin-bottom:2rem;
+    }
+
+    /* About */
+    .about{
+      display:grid;grid-template-columns:1.2fr .8fr;gap:2rem;
+    }
+    .card{
+      background:var(--card);border:1px solid rgba(0,0,0,.06);
+      border-radius:1rem; padding:1.25rem 1.25rem;
+      box-shadow:0 10px 30px rgba(0,0,0,.06);
+    }
+    .about p{color:var(--muted);line-height:1.8}
+    .info-grid{display:grid;grid-template-columns:repeat(2, minmax(0,1fr));gap:1rem;margin-top:1rem}
+    .info-item{padding:.8rem;border:1px dashed rgba(0,0,0,.08);border-radius:.6rem}
+    .info-item b{color:var(--text)}
+
+    /* Skills */
+    .skills__list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
+    .skill{background:var(--card);border:1px solid rgba(0,0,0,.06);border-radius:.8rem;padding:1rem}
+    .skill__top{display:flex;align-items:center;justify-content:space-between;margin-bottom:.6rem}
+    .skill__top b{font-weight:600}
+    .bar{height:.55rem;background:#e8ecf3;border-radius:.4rem;overflow:hidden}
+    .bar span{display:block;height:100%;width:0;background:linear-gradient(90deg,#5b7cfa,#34a853)}
+
+    /* Projects */
+    .filter-row{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:1rem}
+    .chip{
+      border:1px solid rgba(0,0,0,.12); padding:.45rem .75rem;border-radius:999px;
+      background:var(--card);cursor:pointer;color:var(--muted);font-weight:600;transition:.2s;
+    }
+    .chip.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+    .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem}
+    .project{
+      background:var(--card);border:1px solid rgba(0,0,0,.06);
+      border-radius:.9rem; padding:1rem; display:flex;flex-direction:column;gap:.6rem;
+      transition:.25s;
+    }
+    .project:hover{transform:translateY(-4px);box-shadow:0 15px 35px rgba(0,0,0,.08)}
+    .project .tags{display:flex;gap:.4rem;flex-wrap:wrap}
+    .tag{font-size:.75rem;background:#eef2ff;color:#3a57d1;padding:.25rem .5rem;border-radius:.4rem}
+
+    /* Timeline */
+    .timeline{position:relative;padding-left:1.5rem}
+    .timeline::before{content:'';position:absolute;left:.4rem;top:.3rem;bottom:.3rem;width:3px;background:#e3e7ee;border-radius:2px}
+    .t-item{position:relative;padding:1rem 1rem 1rem 2rem;background:var(--card);border:1px solid rgba(0,0,0,.06);border-radius:.8rem;margin:.8rem 0}
+    .t-item::before{content:'';position:absolute;left:.2rem;top:1.2rem;width:.7rem;height:.7rem;background:var(--primary);border-radius:50%;box-shadow:0 0 0 4px #eaf0ff}
+
+    /* Testimonials slider */
+    .slider{position:relative}
+    .slides{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem}
+    .testimonial{background:var(--card);border:1px solid rgba(0,0,0,.06);border-radius:.8rem;padding:1rem;color:var(--muted)}
+    .slider-controls{display:flex;justify-content:center;gap:.6rem;margin-top:1rem}
+    .ctrl{border:none;background:var(--primary);color:#fff;border-radius:.4rem;padding:.5rem .8rem;cursor:pointer}
+
+    /* Contact */
+    .contact{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+    .form{display:flex;flex-direction:column;gap:.8rem}
+    .input{
+      border:1px solid rgba(0,0,0,.12);background:var(--card);
+      color:var(--text);border-radius:.6rem;padding:.7rem;
+    }
+    .error{font-size:.8rem;color:#d93025;min-height:1rem}
+    .submit{border:none;background:var(--primary);color:#fff;padding:.8rem;border-radius:.6rem;font-weight:700;cursor:pointer}
+
+    /* Footer */
+    footer{padding:2rem 1rem;border-top:1px solid rgba(0,0,0,.06);background:var(--card)}
+    .socials{display:flex;justify-content:center;gap:.8rem;margin-top:.6rem}
+    .socials a{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;
+      background:#eef2ff;color:#3a57d1;text-decoration:none;transition:.2s}
+    .socials a:hover{transform:translateY(-2px);box-shadow:0 10px 20px rgba(0,0,0,.08)}
+
+    /* Reveal + spy */
+    section{opacity:0;transform:translateY(40px);transition:opacity .8s, transform .8s}
+    section.show{opacity:1;transform:translateY(0)}
+
+    /* Back to top */
+    #toTop{
+      position:fixed;right:1rem;bottom:1rem;background:var(--primary);color:#fff;border:none;
+      width:42px;height:42px;border-radius:50%;display:none;place-items:center;cursor:pointer;
+      box-shadow:0 10px 25px rgba(0,0,0,.18)
+    }
+    #toTop.show{display:grid}
+
+    /* Dark mode overrides */
+    body.dark{background:var(--dark-bg);color:var(--dark-text)}
+    body.dark header{background:rgba(21,26,33,.7);border-bottom-color:#222}
+    body.dark .card, body.dark footer{background:var(--dark-card);border-color:#1f2630}
+    body.dark .muted, body.dark .testimonial, body.dark p{color:var(--dark-muted)}
+    body.dark .chip{background:var(--dark-card);border-color:#28303b;color:var(--dark-muted)}
+    body.dark .chip.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+    body.dark .input{background:#11161e;border-color:#28303b;color:var(--dark-text)}
+    body.dark .socials a{background:#1b2330;color:#9db6ff}
+    @media (max-width:900px){
+      .about{grid-template-columns:1fr}
+      .skills__list{grid-template-columns:1fr}
+      .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .slides{grid-template-columns:1fr}
+      .contact{grid-template-columns:1fr}
+    }
+    @media (max-width:768px){
+      .nav__links{display:none; position:absolute; right:1rem; top:64px;
+        background:var(--card); padding:.8rem; border-radius:.6rem; border:1px solid rgba(0,0,0,.08); flex-direction:column}
+      .nav__links.show{display:flex}
+      .nav__toggle{display:block}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <nav class="nav">
+      <div class="logo">Kishlay Raj</div>
+      <ul id="navLinks" class="nav__links">
+        <li><a href="#home" class="active">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#timeline">Timeline</a></li>
+        <li><a href="#testimonials">Testimonials</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="nav__right">
+        <button id="modeBtn" class="mode-btn">🌙</button>
+        <i id="navToggle" class='bx bx-menu nav__toggle'></i>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section id="home" class="hero">
+    <div class="hero__card">
+      <h1 class="hero__title">Hi, I'm <span>Kishlay Raj</span><br/>B.Tech CSE (First Year), Rungta University</h1>
+      <p id="typing" class="hero__typing"></p>
+      <div class="hero__cta">
+        <a href="#projects" class="btn primary"><i class='bx bx-code-alt'></i> View Projects</a>
+        <a href="#contact" class="btn"><i class='bx bx-envelope'></i> Contact Me</a>
+        <!-- Replace with your real usernames/links -->
+        <a href="https://instagram.com/your_instagram_here" target="_blank" class="btn"><i class='bx bxl-instagram'></i> Instagram</a>
+        <a href="https://linkedin.com/in/your_linkedin_here" target="_blank" class="btn"><i class='bx bxl-linkedin'></i> LinkedIn</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="section">
+    <div class="container">
+      <h2 class="section__title">About Me</h2>
+      <div class="about">
+        <div class="card">
+          <p>
+            I'm Kishlay, a first-year Computer Science student at Rungta University. I enjoy building elegant, responsive web interfaces,
+            playing with creative CSS, and adding delightful micro-interactions using JavaScript. I learn best by creating—small projects,
+            clean components, and practical UI challenges.
+          </p>
+          <div class="info-grid">
+            <div class="info-item"><b>Location:</b><br/>Chhattisgarh, India</div>
+            <div class="info-item"><b>Degree:</b><br/>B.Tech (CSE), 1st Year</div>
+            <div class="info-item"><b>Focus:</b><br/>Web Dev, JS, UI/UX</div>
+            <div class="info-item"><b>Interests:</b><br/>CSS Art, Typing Effects</div>
+          </div>
+        </div>
+        <div class="card">
+          <h3 style="margin-bottom:.6rem">Quick Highlights</h3>
+          <ul style="list-style: none; display:grid; gap:.6rem">
+            <li><i class='bx bx-check-circle' style="color:var(--primary)"></i> Built responsive layouts with Flexbox & Grid</li>
+            <li><i class='bx bx-check-circle' style="color:var(--primary)"></i> Animated skill bars and scroll reveals</li>
+            <li><i class='bx bx-check-circle' style="color:var(--primary)"></i> Implemented dark mode with localStorage</li>
+            <li><i class='bx bx-check-circle' style="color:var(--primary)"></i> Created project filters using vanilla JS</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills" class="section">
+    <div class="container">
+      <h2 class="section__title">Skills</h2>
+      <div class="skills__list">
+        <div class="skill">
+          <div class="skill__top"><b>HTML5</b><span>95%</span></div>
+          <div class="bar"><span style="--w:95%"></span></div>
+        </div>
+        <div class="skill">
+          <div class="skill__top"><b>CSS3</b><span>85%</span></div>
+          <div class="bar"><span style="--w:85%"></span></div>
+        </div>
+        <div class="skill">
+          <div class="skill__top"><b>JavaScript</b><span>75%</span></div>
+          <div class="bar"><span style="--w:75%"></span></div>
+        </div>
+        <div class="skill">
+          <div class="skill__top"><b>UI/UX</b><span>80%</span></div>
+          <div class="bar"><span style="--w:80%"></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects" class="section">
+    <div class="container">
+      <h2 class="section__title">Projects</h2>
+      <div class="card">
+        <div class="filter-row">
+          <button class="chip active" data-filter="all">All</button>
+          <button class="chip" data-filter="html">HTML</button>
+          <button class="chip" data-filter="css">CSS</button>
+          <button class="chip" data-filter="js">JavaScript</button>
+        </div>
+        <div class="grid" id="projectGrid">
+          <div class="project" data-cat="html css">
+            <h4>Responsive Profile Cards</h4>
+            <p class="muted">Clean cards with Flexbox, hover transitions, and accessible semantics.</p>
+            <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span></div>
+          </div>
+          <div class="project" data-cat="css">
+            <h4>CSS Art: Galaxy Gradient</h4>
+            <p class="muted">Animated gradients and glassmorphism with pure CSS.</p>
+            <div class="tags"><span class="tag">CSS</span></div>
+          </div>
+          <div class="project" data-cat="js">
+            <h4>Typing Effect Component</h4>
+            <p class="muted">Vanilla JS typewriter with pause/resume and loop.</p>
+            <div class="tags"><span class="tag">JavaScript</span></div>
+          </div>
+          <div class="project" data-cat="html js">
+            <h4>Theme Toggle + Storage</h4>
+            <p class="muted">Dark mode persisted using localStorage.</p>
+            <div class="tags"><span class="tag">HTML</span><span class="tag">JavaScript</span></div>
+          </div>
+          <div class="project" data-cat="css js">
+            <h4>Animated Skill Bars</h4>
+            <p class="muted">IntersectionObserver-based fill animations.</p>
+            <div class="tags"><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
+          </div>
+          <div class="project" data-cat="html css js">
+            <h4>Portfolio Single-File</h4>
+            <p class="muted">All-in-one HTML + internal CSS + JS template.</p>
+            <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Timeline -->
+  <section id="timeline" class="section">
+    <div class="container">
+      <h2 class="section__title">Timeline</h2>
+      <div class="timeline">
+        <div class="t-item">
+          <b>2025 — Started B.Tech CSE</b>
+          <p class="muted">Joined Rungta International skills University, began exploring web dev and algorithms.</p>
+        </div>
+        <div class="t-item">
+          <b>2025 — First Portfolio</b>
+          <p class="muted">Built my single-file portfolio with dark mode and animations.</p>
+        </div>
+        <div class="t-item">
+          <b>2026 — Frontend Projects</b>
+          <p class="muted">Focused on reusable UI components and clean architecture.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section id="testimonials" class="section">
+    <div class="container">
+      <h2 class="section__title">Testimonials</h2>
+      <div class="slider card">
+        <div id="slides" class="slides">
+          <div class="testimonial"><b>Mentor</b><br/>“Kishlay learns fast and codes clean. Bright future!”</div>
+          <div class="testimonial"><b>Classmate</b><br/>“Always helps, and his CSS tricks are next-level!”</div>
+          <div class="testimonial"><b>Project Buddy</b><br/>“Reliable teammate, gets things done.”</div>
+        </div>
+        <div class="slider-controls">
+          <button id="prev" class="ctrl"><i class='bx bx-left-arrow-alt'></i></button>
+          <button id="next" class="ctrl"><i class='bx bx-right-arrow-alt'></i></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="section">
+    <div class="container">
+      <h2 class="section__title">Contact</h2>
+      <div class="contact">
+        <div class="card">
+          <h3 style="margin-bottom:.6rem">Get in touch</h3>
+          <p class="muted">Open to collaborations, learning, and fun frontend challenges.</p>
+          <div class="socials" style="justify-content:flex-start;margin-top:1rem">
+            <!-- Replace links with your actual profiles -->
+            <a href="https://www.instagram.com/kishlay_raj_2008?igsh=MTFhN2t4aDVrZDlmcA==&utm_source=ig_contact_invite" target="_blank" aria-label="Instagram"><i class='bx bxl-instagram'></i></a>
+            <a href="https://www.linkedin.com/in/kishlay-raj-7a36b6383" target="_blank" aria-label="LinkedIn"><i class='bx bxl-linkedin'></i></a>
+            <a href="mailto:your_email@example.com" aria-label="Email"><i class='bx bx-envelope'></i></a>
+          </div>
+        </div>
+        <form id="contactForm" class="form card" novalidate>
+          <input id="name" class="input" type="text" placeholder="Your name"/>
+          <div id="nameErr" class="error"></div>
+          <input id="email" class="input" type="email" placeholder="Email address"/>
+          <div id="emailErr" class="error"></div>
+          <textarea id="message" class="input" rows="5" placeholder="Message"></textarea>
+          <div id="msgErr" class="error"></div>
+          <button class="submit" type="submit"><i class='bx bx-send'></i> Send</button>
+          <div id="formStatus" class="error" style="color:#2b9f4a;font-weight:600"></div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container" style="text-align:center">
+      <div>© <span id="year"></span> Kishlay Raj • Rungta University</div>
+      <div class="socials">
+        <!-- Replace with your actual links -->
+        <a href="https://instagram.com/your_instagram_here" target="_blank"><i class='bx bxl-instagram'></i></a>
+        <a href="https://linkedin.com/in/your_linkedin_here" target="_blank"><i class='bx bxl-linkedin'></i></a>
+        <a href="#home"><i class='bx bx-home-alt'></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to top -->
+  <button id="toTop" title="Back to top"><i class='bx bx-chevron-up' style="font-size:1.4rem"></i></button>
+
+  <script>
+    // Helper selectors
+    const $ = (sel, root=document) => root.querySelector(sel);
+    const $$ = (sel, root=document) => [...root.querySelectorAll(sel)];
+
+    // Mobile nav toggle
+    const navToggle = $('#navToggle');
+    const navLinks = $('#navLinks');
+    navToggle.addEventListener('click', ()=> navLinks.classList.toggle('show'));
+    $$('#navLinks a').forEach(a=>{
+      a.addEventListener('click', ()=> navLinks.classList.remove('show'));
+    });
+
+    // Dark mode with localStorage
+    const modeBtn = $('#modeBtn');
+    const applyTheme = (isDark) => {
+      document.body.classList.toggle('dark', isDark);
+      modeBtn.textContent = isDark ? '☀️' : '🌙';
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    };
+    applyTheme(localStorage.getItem('theme') === 'dark');
+    modeBtn.addEventListener('click', ()=> applyTheme(!document.body.classList.contains('dark')));
+
+    // Typing effect
+    const typingEl = $('#typing');
+    const lines = [
+      'Web Developer in making.',
+      'Loves CSS animations & clean UI.',
+      'Learning JavaScript, one bug at a time.'
+    ];
+    let li = 0, ci = 0, deleting = false;
+    function typeLoop(){
+      const current = lines[li];
+      typingEl.textContent = current.slice(0, ci) + (ci%2===0 ? '|' : '');
+      if(!deleting){
+        if(ci < current.length){ ci++; }
+        else { deleting = true; setTimeout(typeLoop, 1200); return; }
+      }else{
+        if(ci > 0){ ci--; }
+        else { deleting = false; li = (li+1)%lines.length; }
+      }
+      setTimeout(typeLoop, deleting ? 35 : 65);
+    }
+    typeLoop();
+
+    // Reveal sections on scroll
+    const observer = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){ e.target.classList.add('show'); }
+      })
+    }, {threshold: .12});
+    $$('section').forEach(sec=> observer.observe(sec));
+
+    // Scroll spy
+    const spy = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        const id = entry.target.id;
+        const link = $(`#navLinks a[href="#${id}"]`);
+        if(entry.isIntersecting){
+          $$('#navLinks a').forEach(a=>a.classList.remove('active'));
+          if(link) link.classList.add('active');
+        }
+      })
+    }, {threshold:.6});
+    $$('section').forEach(sec=> spy.observe(sec));
+
+    // Animated skill bars
+    const skillsObs = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          $$('.bar span', entry.target).forEach(span=>{
+            const width = span.style.getPropertyValue('--w') || '70%';
+            span.animate([{width:'0%'},{width:width}], {duration:1200, fill:'forwards', easing:'ease-out'});
+          });
+          skillsObs.unobserve(entry.target);
+        }
+      })
+    }, {threshold:.4});
+    skillsObs.observe($('#skills'));
+
+    // Projects filter
+    const chips = $$('.chip');
+    const cards = $$('#projectGrid .project');
+    chips.forEach(ch=>{
+      ch.addEventListener('click', ()=>{
+        chips.forEach(c=> c.classList.remove('active'));
+        ch.classList.add('active');
+        const f = ch.dataset.filter;
+        cards.forEach(card=>{
+          if(f === 'all'){ card.style.display = 'flex'; return; }
+          const cat = card.dataset.cat.split(' ');
+          card.style.display = cat.includes(f) ? 'flex' : 'none';
+        })
+      })
+    });
+
+    // Testimonials slider (simple)
+    const slides = $('#slides');
+    const prev = $('#prev'), next = $('#next');
+    let offset = 0;
+    function updateSlider(){
+      slides.style.transform = `translateX(${offset}px)`;
+      slides.style.transition = 'transform .4s ease';
+    }
+    next.addEventListener('click', ()=>{
+      const cardW = slides.firstElementChild.getBoundingClientRect().width + 16;
+      offset -= cardW;
+      const maxOffset = -(slides.scrollWidth - slides.clientWidth);
+      if(offset < maxOffset) offset = 0;
+      updateSlider();
+    });
+    prev.addEventListener('click', ()=>{
+      const cardW = slides.firstElementChild.getBoundingClientRect().width + 16;
+      offset += cardW;
+      if(offset > 0) offset = -(slides.scrollWidth - slides.clientWidth);
+      updateSlider();
+    });
+
+    // Contact form validation (basic)
+    const form = $('#contactForm');
+    const name = $('#name'), email = $('#email'), message = $('#message');
+    const nameErr = $('#nameErr'), emailErr = $('#emailErr'), msgErr = $('#msgErr'), formStatus = $('#formStatus');
+    const isEmail = v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+
+    form.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      let ok = true;
+      nameErr.textContent = emailErr.textContent = msgErr.textContent = formStatus.textContent = '';
+
+      if(!name.value.trim()){ nameErr.textContent = 'Please enter your name.'; ok = false; }
+      if(!email.value.trim() || !isEmail(email.value)){ emailErr.textContent = 'Enter a valid email.'; ok = false; }
+      if(!message.value.trim() || message.value.length < 10){ msgErr.textContent = 'Message must be at least 10 characters.'; ok = false; }
+
+      if(ok){
+        formStatus.textContent = 'Message submitted successfully (demo).';
+        form.reset();
+      }
+    });
+
+    // Back to top button
+    const toTop = $('#toTop');
+    window.addEventListener('scroll', ()=>{
+      if(window.scrollY > 400) toTop.classList.add('show'); else toTop.classList.remove('show');
+    });
+    toTop.addEventListener('click', ()=> window.scrollTo({top:0, behavior:'smooth'}));
+
+    // Year
+    $('#year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
